@@ -1,0 +1,33 @@
+title: My Site Title
+email: not-that-hard-to-guess@gmail.com
+description: "Description of this Site"
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: twitterhandle
+github_username: githubhandle
+favicon: /assets/img/favicon.png
+
+exclude: ['_notes/Templates']
+
+theme: jekyll-theme-cayman
+
+# Build settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+collections:
+    notes:
+      output: true
+      permalink: /notes/:title
+
+toc:
+  max_leve: 3
+
+defaults:
+  - scope:
+      path: ""
+      type: notes
+    values:
+      layout: default
+      content-type: notes
