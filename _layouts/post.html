@@ -40,7 +40,9 @@ layout: base
       {% endif %}
 
       <article role="main" class="blog-post">
-        {{ content }}
+        {%- include body_content.html -%}
+        <hr>
+        {%- include node_graph.html -%}
       </article>
 
       {% if page.tags.size > 0 %}

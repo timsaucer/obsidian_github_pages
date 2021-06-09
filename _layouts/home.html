@@ -2,7 +2,9 @@
 layout: page
 ---
 
-{{ content }}
+{%- include body_content.html -%}
+<hr>
+{%- include node_graph.html -%}
 
 {% assign posts = paginator.posts | default: site.posts %}
 

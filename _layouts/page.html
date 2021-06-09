@@ -15,7 +15,11 @@ layout: base
         </div>
       {% endif %}
 
-      {{ content }}
+
+    {%- include body_content.html -%}
+    <hr>
+    {%- include node_graph.html -%}
+
 
       {% if page.after-content %}
         <div class="after-content">
