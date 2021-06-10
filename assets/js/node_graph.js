@@ -1,4 +1,5 @@
 ---
+layout: null
 ---
 
 const MINIMAL_NODE_SIZE = 8;
@@ -18,13 +19,13 @@ const MAX_LABEL_LENGTH = 50;
 {%- assign first_tag = true -%}
 {%- assign first_node = true -%}
 {%- assign first_link = true -%}
-{%- for note1 in site.notes -%}
+{%- for note1 in site.posts -%}
     {%- if first_node -%}
         {%- assign first_node = false -%}
         {%- assign nodes_array = nodes_array | append: '  ' -%}
     {%- else -%}
-        {%- assign nodes_array = nodes_array | append: ",
-  " -%}
+        {%- assign nodes_array = nodes_array | append: ",  " -%}
+    {%- endif -%}
     {%- for curr_tag in note1.tags -%}
         {%- unless tag_array contains curr_tag -%}
             {%- if first_tag -%}
@@ -35,9 +36,8 @@ const MAX_LABEL_LENGTH = 50;
             {%- assign tag_array = tag_array | append: '"' | append: curr_tag | append: '"' -%}
         {%- endunless -%}
     {%- endfor -%}
-    {%- endif -%}
-{%- assign nodes_array = nodes_array | append: '{ "id": "' | append: note1.title | append: '", "path": "' | append: site.baseurl | append: note1.url | append: '", tags: ' | append: note1.tags | append: '}' -%}
-    {%- for note2 in site.notes -%}
+    {%- assign nodes_array = nodes_array | append: '{ "id": "' | append: note1.title | append: '", "path": "' | append: site.baseurl | append: note1.url | append: '", tags: ' | append: note1.tags | append: '}' -%}
+    {%- for note2 in site.posts -%}
         {%- if note2.url != note1.url -%}
             {%- if note2.content contains note1.title -%}
                 {%- if first_link -%}
@@ -59,7 +59,7 @@ let allTags = [ {{ tag_array }} ];
 
 let activeNodes = [];
 let activeEdges = [];
-let activeTags = [ "scenario" ];
+let activeTags = [];
 
 const nodeSize = {};
 
@@ -109,10 +109,15 @@ const updateActiveNodes = () => {
         });
     }
     activeEdges = [];
+    activeNodes.forEach((currNode) => {
+        console.log("Active node |", currNode.id, "|");
+    });
     allEdges.forEach((currEdge) => {
+        console.log("searching for currEdge.source |", currEdge.source, "| and currEdge.target |", currEdge.target, "|");
         if (activeNodes.findIndex((currNode) => currNode.id == currEdge.source || currNode.id == currEdge.source.id) != -1 &&
             activeNodes.findIndex((currNode) => currNode.id == currEdge.target || currNode.id == currEdge.target.id) != -1) {
                 activeEdges.push(currEdge);
+                console.log("Active edge found");
             }
     });
 };
@@ -283,7 +288,7 @@ const resize = () => {
     .filter((_d, i, nodes) => d3.select(nodes[i]).attr("active"))
     .attr("r", (d) => zoomOrKeep(ACTIVE_RADIUS_FACTOR * nodeSize[d.id]));
 
-  document.getElementById("zoom").innerHTML = zoomLevel.toFixed(2);
+  // document.getElementById("zoom").innerHTML = zoomLevel.toFixed(2);
 };
 
 const ticked = () => {

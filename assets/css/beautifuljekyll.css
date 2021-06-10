@@ -993,3 +993,55 @@ pre {
   display: block;
   margin: 0 auto;
 }
+
+/* --- Obsidian Integration style data --- */
+
+line {
+  stroke: #ccc;
+  opacity: 0.5;
+}
+
+circle {
+  cursor: pointer;
+  fill: #98907d;
+  transition: all 0.15s ease-out;
+}
+
+.tags {
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.tags li {
+  float: left;
+}
+
+.tag {
+  color: #555555;
+  background: #f7f7f7;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0 12px;
+  border-radius: 32px;
+  height: auto;
+  vertical-align: middle;
+  font-family:  Inter, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: normal !important;
+  font-size: 13px;
+}
+
+.node-tag {
+  color: #555555;
+  background: #EFE5CC;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0 12px;
+  border-radius: 32px;
+  height: auto;
+  vertical-align: middle;
+  font-family:  Inter, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: normal !important;
+  font-size: 13px;
+}

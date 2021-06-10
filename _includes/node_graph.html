@@ -1,8 +1,7 @@
 <div id="graph-wrapper">
-
     <ul style="padding-left: 20px; margin-top: 20px;" class="tags">
     {%- assign all_tags = "" -%}
-    {%- for curr_note in site.notes -%}
+    {%- for curr_note in site.posts -%}
         {%- for curr_tag in curr_note.tags -%}
             {%- unless all_tags contains curr_tag -%}
                 {%- assign all_tags = all_tags | append: ' ' | append: curr_tag -%}
